@@ -22,7 +22,7 @@ Feature: Initialize Task Tracker Configuration
     Then I should be prompted to select a backend
     And the available backends should include "github"
     When I select "github"
-    Then I should be prompted for the repository and authentication token
-    When I enter "my-org/my-repo" and provide a token
+    Then I should be prompted for the repository and an authentication token source (e.g. env var name)
+    When I enter "my-org/my-repo" and choose env var "GITHUB_TOKEN"
     Then a configuration file ".task-tracker.json" should be created
-    And the configuration should specify backend "github" with the given repo and token
+    And the configuration should specify backend "github" with repo "my-org/my-repo" and tokenEnv "GITHUB_TOKEN"
