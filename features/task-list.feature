@@ -7,7 +7,7 @@ Feature: List Tasks
       | TASK-001 | Fix login bug  | in_progress  |
       | TASK-002 | Write tests    | todo         |
       | TASK-003 | Deploy v2      | in_progress  |
-    When I run "task-tracker list in-progress"
+    When I run "task-tracker list --status in_progress"
     Then the output should contain "TASK-001"
     And the output should contain "TASK-003"
     And the output should not contain "TASK-002"
