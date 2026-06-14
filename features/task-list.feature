@@ -20,7 +20,7 @@ Feature: List Tasks
       | TASK-002 | Write tests      | todo         |
       | TASK-003 | Deploy v2        | done         |
       | TASK-004 | Refactor auth    | todo         |
-    When I run "task-tracker list todo"
+    When I run "task-tracker list --status todo"
     Then the output should contain "TASK-002"
     And the output should contain "TASK-004"
     And the output should not contain "TASK-001"
