@@ -9,12 +9,10 @@ A CLI tool for code review context retrieval and task tracking. Given a task ID,
 task-tracker review-prep TASK-001 --base main --out /tmp/review
 
 # Task management
-task-tracker list
+task-tracker list [--status <todo|in_progress|done>]
 task-tracker get <id>
-task-tracker add <title>
-task-tracker update <id>
-task-tracker delete <id>
 task-tracker search <query>
+task-tracker download <id> [-o file]
 
 # Init
 task-tracker init
