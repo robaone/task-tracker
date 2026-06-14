@@ -35,7 +35,7 @@ Feature: List Tasks
       | TASK-003 | Deploy v2        | done         |
       | TASK-004 | Refactor auth    | todo         |
       | TASK-005 | Update deps      | done         |
-    When I run "task-tracker list done"
+    When I run "task-tracker list --status done"
     Then the output should contain "TASK-003"
     And the output should contain "TASK-005"
     And the output should not contain "TASK-001"
