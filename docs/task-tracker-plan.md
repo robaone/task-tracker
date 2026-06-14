@@ -257,7 +257,7 @@ const tasks = await provider.list({ status: 'in_progress' })
 const bundle = await createBundle({
   taskId: 'TASK-001',
   provider,
-  outDir: '/tmp/review'
+  outDir: '$TEMP/review'
 })
 ```
 

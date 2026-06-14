@@ -6,7 +6,7 @@ A CLI tool for code review context retrieval and task tracking. Given a task ID,
 
 ```bash
 # Primary workflow — prepare code review context
-task-tracker review-prep TASK-001 --base main --out /tmp/review
+task-tracker review-prep TASK-001 --base main --out $TEMP/review
 
 # Task management
 task-tracker list [--status <todo|in_progress|done>]
