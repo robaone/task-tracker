@@ -39,7 +39,7 @@ interface TaskProvider {
   // Context retrieval
   getComments(taskId: string): Promise<Comment[]>
   getAttachments(taskId: string): Promise<Attachment[]>
-  downloadAttachment(taskId: string, attachmentId: string, destDir: string): Promise<string>
+  downloadAttachment(taskId: string, attachmentId: string, destDir: string): Promise<string | undefined>
   getReferences(taskId: string): Promise<Reference[]>
 }
 
