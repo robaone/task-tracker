@@ -2,7 +2,7 @@
 
 Task Tracker uses a **provider abstraction** to support multiple task management backends through a single read-only interface.
 
-## Built-in Providers
+## Planned Providers
 
 ### JSON (local file)
 
