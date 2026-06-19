@@ -64,7 +64,8 @@ Adding a new backend (Jira, GitHub Issues, Linear, Trello, Notion, etc.) is stra
 
 ```typescript
 // src/providers/jira.ts
-import { TaskProvider, Task, Comment, Attachment, Reference, TaskFilter } from '../types'
+import type { Task, Comment, Attachment, Reference, TaskFilter } from '../types'
+import type { TaskProvider } from '../provider'
 
 export class JiraProvider implements TaskProvider {
   constructor(private config: { baseUrl: string; token: string }) {}
