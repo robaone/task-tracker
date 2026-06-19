@@ -8,6 +8,7 @@
 
 ## Getting Started
 
+> If you don't see a `package.json` at the repo root yet, the TypeScript/Node implementation hasn't been bootstrapped—start with [Implementation Plan](./Implementation-Plan.md) Phase 1, then run the commands below.
 ```bash
 # Clone the repository
 git clone git@github.com:robaone/task-tracker.git
