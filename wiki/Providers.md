@@ -87,7 +87,7 @@ export class JiraProvider implements TaskProvider {
 registerProvider('jira', (config) => new JiraProvider(config))
 ```
 
-Since the interface is read-only, every backend is expected to support all methods. Context methods like `getAttachments` may return `[]` if not applicable. No `NotSupportedError` is needed — the interface simply doesn't include write operations.
+Since the interface is read-only, every backend implements the same method surface area, but some context methods may return `[]` when the backend has no equivalent concept.
 
 ## Planned Backends
 
