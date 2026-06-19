@@ -13,4 +13,4 @@ Reduce token usage in AI-assisted code review by curating exactly what the LLM n
 - **[Providers](wiki/Providers)** — Backend abstraction and how to add new ones
 - **[Feature Specifications](wiki/Feature-Specifications)** — Gherkin BDD specs for all behaviors
 - **[Development Setup](wiki/Development-Setup)** — Build, test, and contribute
-- **[Implementation Plan](wiki/Implementation-Plan)** — Phased roadmap from project init to complete CLI
+- **[Implementation Plan](wiki/Implementation-Plan.md)** — Phased roadmap from project init to complete CLI
