@@ -24,4 +24,4 @@ task-tracker init
 2. **Diff module** computes the git diff against the base branch
 3. **Bundler** combines everything into a single output directory with a `context.md` file formatted for LLM consumption
 
-See [docs/task-tracker-plan.md](docs/task-tracker-plan.md) for the full architecture.
+See the [wiki](https://github.com/robaone/task-tracker/wiki) for architecture, CLI reference, provider docs, and more.
