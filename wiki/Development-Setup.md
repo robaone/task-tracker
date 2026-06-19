@@ -30,8 +30,9 @@ npm run typecheck
 npm run lint
 ```
 
-## Project Structure
+## Planned Project Structure
 
+> This is the intended layout once the TypeScript implementation exists (see [Implementation Plan](./Implementation-Plan.md)).
 ```
 task-tracker/
 ├── src/
