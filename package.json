@@ -1,9 +1,10 @@
 {
   "name": "task-tracker",
   "version": "0.1.0",
-  "description": "CLI tool for code review context retrieval",
-  "main": "dist/index.js",
-  "bin": {
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "description": "CLI tool for code review context retrieval"
     "task-tracker": "dist/cli.js"
   },
   "scripts": {
