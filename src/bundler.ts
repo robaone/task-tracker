@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { TaskProvider } from './provider'
-import { ReviewBundle, Comment, Reference } from './types'
+import { ReviewBundle } from './types'
 import { getDiff, DiffOptions } from './diff'
 
 export interface BundleOptions {
