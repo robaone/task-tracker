@@ -231,9 +231,9 @@ export class TrelloProvider implements TaskProvider {
     }
 
     const buffer = Buffer.from(await res.arrayBuffer())
-    const filePath = path.join(destDir, attachment.filename)
+    const safeName = path.basename(attachment.filename)
+    const filePath = path.join(destDir, safeName)
     fs.writeFileSync(filePath, buffer)
-    return filePath
   }
 
   async getReferences(_taskId: string): Promise<Reference[]> {
