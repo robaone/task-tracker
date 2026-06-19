@@ -94,7 +94,7 @@ interface TaskProvider {
 }
 ```
 
-Unsupported methods return empty arrays (`[]`) rather than throwing.
+Unsupported list-returning methods return empty arrays (`[]`) rather than throwing; providers should return `undefined` or throw a clear error for unsupported downloads.
 
 ## Diff Module (`src/diff.ts`)
 
