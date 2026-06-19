@@ -1,5 +1,3 @@
-import * as fs from 'fs'
-import * as path from 'path'
 import { TaskProvider } from '../provider'
 import { Task, TaskStatus, TaskFilter, Comment, Attachment, Reference, Priority } from '../types'
 
