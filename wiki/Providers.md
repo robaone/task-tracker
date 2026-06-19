@@ -93,7 +93,7 @@ Since the interface is read-only, every backend implements the same method surfa
 
 | Backend | Status | Notes |
 |---------|--------|-------|
-| JSON (local) | Planned | Phase 1 implementation |
+| JSON (local) | Built-in | Initial provider |
 | GitHub Issues | Planned | Via GitHub REST API |
 | Jira | Future | Via Jira REST API |
 | Linear | Future | Via Linear GraphQL API |
