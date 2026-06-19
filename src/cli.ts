@@ -175,9 +175,9 @@ program
       const cfg = loadConfig()
       const provider = createProvider(cfg.backend, cfg.config)
       const task = await provider.get(id)
-      const outPath = opts.out ? path.resolve(opts.out) : path.resolve(`${id}.json`)
+      const safeId = path.basename(id)
+      const outPath = opts.out ? path.resolve(opts.out) : path.resolve(`${safeId}.json`)
       fs.writeFileSync(outPath, JSON.stringify(task, null, 2), 'utf-8')
-      console.log(`Task exported to ${outPath}`)
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.error(`Error: ${err.message}`)
