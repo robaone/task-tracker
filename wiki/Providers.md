@@ -51,7 +51,7 @@ interface TaskFilter {
 }
 ```
 
-Methods that aren't supported by a given backend return **empty arrays** (`[]`) rather than throwing. The interface is designed to be entirely safe to call — any method can fail with a clear error, but unsupported features degrade gracefully.
+Methods that aren't supported by a given backend return **empty arrays** (`[]`) for list-like methods, and return `undefined` for optional/unsupported downloads rather than throwing.
 
 ## Adding a New Backend
 
