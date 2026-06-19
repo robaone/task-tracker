@@ -26,7 +26,7 @@ The project is implemented in **phases**, with each phase building on the previo
 
 - [ ] Implement `TaskProvider` for local JSON files
 - [ ] Read-only: parse file, filter, search
-- [ ] Context methods return `[]` for unsupported features
+- [ ] Context list methods return `[]` for unsupported features; unsupported attachment downloads should return `undefined` (or throw a clear error)
 - [ ] Write tests in `tests/json.test.ts`
 
 ## Phase 5: Provider Registry (`src/registry.ts`)
