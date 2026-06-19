@@ -82,7 +82,7 @@ Feature files (`.feature` files in `features/`) describe behavior in Gherkin syn
 
 ## Adding a New Provider
 
-See [Providers](Providers) for the full guide on implementing and registering new backends.
+See [Providers](./Providers.md) for the full guide on implementing and registering new backends.
 
 ## Code Style
 
