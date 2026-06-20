@@ -65,7 +65,7 @@ function formatContextMd(bundle: ReviewBundle): string {
 
 export async function createBundle(options: BundleOptions): Promise<ReviewBundle> {
   const { taskId, provider, baseBranch, includeDiff } = options
-  const outDir = options.outDir ?? path.resolve(process.cwd(), `review-${taskId}`)
+  const outDir = options.outDir ?? path.resolve(process.cwd(), `review-${path.basename(taskId)}`)
 
   const task = await provider.get(taskId)
 
