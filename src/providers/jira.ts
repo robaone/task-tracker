@@ -190,13 +190,24 @@ export class JiraProvider implements TaskProvider {
 
   async list(filter?: TaskFilter): Promise<Task[]> {
     const jql = this.getDefaultJql()
-    const result = await this.apiRequest<JiraSearchResult>('POST', '/search', {
-      jql,
-      maxResults: 100,
-      fields: ['summary', 'status', 'priority', 'labels', 'assignee', 'created', 'updated', 'description'],
-    })
+    const allIssues: JiraIssue[] = []
+    let startAt = 0
+    const maxResults = 100
+    let total: number | undefined
 
-    let tasks = result.issues.map(i => this.mapIssueToTask(i))
+    do {
+      const result = await this.apiRequest<JiraSearchResult>('POST', '/search', {
+        jql,
+        startAt,
+        maxResults,
+        fields: ['summary', 'status', 'priority', 'labels', 'assignee', 'created', 'updated', 'description'],
+      })
+      allIssues.push(...result.issues)
+      total = result.total
+      startAt += maxResults
+    } while (startAt < total)
+
+    let tasks = allIssues.map(i => this.mapIssueToTask(i))
 
     if (filter) {
       if (filter.status) {
