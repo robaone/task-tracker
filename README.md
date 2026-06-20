@@ -24,4 +24,13 @@ task-tracker init
 2. **Diff module** computes the git diff against the base branch
 3. **Bundler** combines everything into a single output directory with a `context.md` file formatted for LLM consumption
 
+## Feature Specifications
+
+The [`_features/`](./_features) directory contains Gherkin `.feature` files that document the expected behavior of the CLI. These are **documentation-only** — they describe the desired user-facing scenarios and serve as acceptance criteria.
+
+- [`task-init.feature`](./_features/task-init.feature) — Configuring the CLI backend
+- [`task-list.feature`](./_features/task-list.feature) — Listing and filtering tasks
+- [`task-download.feature`](./_features/task-download.feature) — Exporting tasks to JSON
+- [`task-review-prep.feature`](./_features/task-review-prep.feature) — The primary code-review workflow
+
 See the [wiki](https://github.com/robaone/task-tracker/wiki) for architecture, CLI reference, provider docs, and more.
