@@ -110,9 +110,10 @@ export class GitHubProvider implements TaskProvider {
     }
   }
 
-  private buildListQuery(filter?: TaskFilter): string {
+  private buildListQuery(filter?: TaskFilter, page: number = 1): string {
     const params = new URLSearchParams()
     params.set('per_page', '100')
+    params.set('page', String(page))
     params.set('state', 'all')
     if (filter?.status === 'done') {
       params.set('state', 'closed')
@@ -131,12 +132,20 @@ export class GitHubProvider implements TaskProvider {
   }
 
   async list(filter?: TaskFilter): Promise<Task[]> {
-    const query = this.buildListQuery(filter)
-    const issues = await this.apiRequest<GitHubIssue[]>(
-      `/repos/${this.owner}/${this.repo}/issues?${query}`
-    )
+    const allIssues: GitHubIssue[] = []
+    let page = 1
+    let fetched: GitHubIssue[]
 
-    const tasks = issues
+    do {
+      const query = this.buildListQuery(filter, page)
+      fetched = await this.apiRequest<GitHubIssue[]>(
+        `/repos/${this.owner}/${this.repo}/issues?${query}`
+      )
+      allIssues.push(...fetched)
+      page++
+    } while (fetched.length === 100)
+
+    const tasks = allIssues
       .filter(i => !i.pull_request)
       .map(i => this.mapIssueToTask(i))
 
