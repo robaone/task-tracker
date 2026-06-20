@@ -1,7 +1,17 @@
 import { describe, it, expect } from 'vitest'
+import { execSync } from 'child_process'
 import { getDiff } from '../src/diff'
 
-describe('getDiff', () => {
+function isGitRepo(): boolean {
+  try {
+    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' })
+    return true
+  } catch {
+    return false
+  }
+}
+
+describe.skipIf(!isGitRepo())('getDiff', () => {
   it('returns diff result with branch info', async () => {
     const result = await getDiff({ base: 'HEAD' })
     expect(result).toHaveProperty('diff')
