@@ -1,7 +1,4 @@
-import { exec } from 'child_process'
-import { promisify } from 'util'
-
-const execAsync = promisify(exec)
+import { spawn } from 'child_process'
 
 export interface DiffOptions {
   base?: string
@@ -16,18 +13,31 @@ export interface DiffResult {
   branch: string
 }
 
+function git(args: string[], cwd?: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const child = spawn('git', args, { cwd })
+    let stdout = ''
+    let stderr = ''
+    child.stdout.on('data', (data: Buffer) => { stdout += data.toString() })
+    child.stderr.on('data', (data: Buffer) => { stderr += data.toString() })
+    child.on('close', (code) => {
+      if (code === 0) resolve(stdout.trim())
+      else reject(new Error(stderr.trim() || `git exited with code ${code}`))
+    })
+    child.on('error', reject)
+  })
+}
+
 async function getCurrentBranch(cwd?: string): Promise<string> {
-  const { stdout } = await execAsync('git rev-parse --abbrev-ref HEAD', { cwd })
-  return stdout.trim()
+  return git(['rev-parse', '--abbrev-ref', 'HEAD'], cwd)
 }
 
 async function getUpstreamBranch(branch: string, cwd?: string): Promise<string | null> {
   try {
-    const { stdout } = await execAsync(
-      `git rev-parse --abbrev-ref --symbolic-full-name "${branch}@{upstream}"`,
-      { cwd }
+    const ref = await git(
+      ['rev-parse', '--abbrev-ref', '--symbolic-full-name', `${branch}@{upstream}`],
+      cwd
     )
-    const ref = stdout.trim()
     return ref.replace(/^refs\/heads\//, '').replace(/^refs\/remotes\/[^\/]+\//, '')
   } catch {
     return null
@@ -37,7 +47,7 @@ async function getUpstreamBranch(branch: string, cwd?: string): Promise<string |
 async function getDefaultBranch(cwd?: string): Promise<string> {
   for (const candidate of ['main', 'master']) {
     try {
-      await execAsync(`git rev-parse --verify "${candidate}"`, { cwd })
+      await git(['rev-parse', '--verify', candidate], cwd)
       return candidate
     } catch {
       continue
@@ -58,17 +68,12 @@ export async function getDiff(options?: DiffOptions): Promise<DiffResult> {
     baseBranch = upstream ?? await getDefaultBranch(cwd)
   }
 
-  const mergeBase = (
-    await execAsync(`git merge-base "${baseBranch}" "${branch}"`, { cwd })
-  ).stdout.trim()
+  const mergeBase = await git(['merge-base', baseBranch, branch], cwd)
 
-  const [diffResult, statResult] = await Promise.all([
-    execAsync(`git diff "${mergeBase}".."${branch}"`, { cwd, maxBuffer: 10 * 1024 * 1024 }),
-    execAsync(`git diff --stat "${mergeBase}".."${branch}"`, { cwd }),
+  const [diff, stat] = await Promise.all([
+    git(['diff', `${mergeBase}..${branch}`], cwd),
+    git(['diff', '--stat', `${mergeBase}..${branch}`], cwd),
   ])
-
-  const diff = diffResult.stdout
-  const stat = statResult.stdout.trim()
 
   const files = stat
     .split('\n')
